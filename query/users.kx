@@ -1,0 +1,160 @@
+<users>
+
+  <searchUser set:{"users#IfParams"}>
+    SELECT * FROM users
+    <where>
+      [[ if name != nil :{
+        AND name = #{name}
+      }]]
+      [[ if status != nil :{
+        AND status = #{status}
+      }]]
+    </>
+  </>
+
+  <gradeUser set:{"users#ElseIfParams"}>
+    SELECT * FROM users
+    [[ if grade == A :{
+      AND score >= 90
+    } else if grade == B :{
+      AND score >= 80
+    } else :{
+      AND score >= 70
+    }]]
+  </>
+
+  <selectByIds set:{"users#IdListParams"}>
+    SELECT * FROM users
+    WHERE id IN (
+      [[ for id in idList :{
+        #{id},
+      }]]
+    )
+  </>
+
+  <selectCols set:{"users#ColumnParams"}>
+    SELECT
+    [[ for col in columns :{
+      ${col},
+    }]]
+    FROM users
+  </>
+
+  <updateUser set:{"users#UpdateParams"}>
+    UPDATE users SET
+    [[ for field in fields :{
+      ${field.Key} = #{field.Value},
+    }]]
+    WHERE id = #{id}
+  </>
+
+  <bulkInsert set:{"users#BulkInsertParams"}>
+    INSERT INTO users (name, email, age) VALUES
+    [[ for row in rows :{
+      (#{row.Name}, #{row.Email}, #{row.Age}),
+    }]]
+  </>
+
+  <unionAll set:{"users#IdListParams"}>
+    [[ for id in idList :{
+      UNION ALL SELECT * FROM users WHERE id = #{id}
+    }]]
+  </>
+
+  <rangeSearch set:{"users#RangeParams"}>
+    SELECT * FROM users
+    <where>
+      [[ if minScore != nil :{
+        AND score \>= #{minScore}
+      }]]
+      [[ if maxScore != nil :{
+        AND score \<= #{maxScore}
+      }]]
+      [[ if minAge != nil :{
+        AND age \> #{minAge}
+      }]]
+      [[ if maxAge != nil :{
+        AND age \< #{maxAge}
+      }]]
+    </>
+  </>
+
+  <subSearch set:{"users#SubqueryParams"}>
+    SELECT * FROM (
+      SELECT * FROM users
+      <where>
+        [[ if status != nil :{
+          AND status = #{status}
+        }]]
+      </>
+    ) sub
+    <where>
+      [[ if minAmount != nil :{
+        AND sub.amount \>= #{minAmount}
+      }]]
+    </>
+  </>
+
+  <switchGrade set:{"users#SwitchParams"}>
+    SELECT * FROM users
+    [[ switch (grade) :{
+      case ("A") :{
+        AND score \>= 90
+      }
+      case ("B") :{
+        AND score \>= 80
+      }
+    }]]
+  </>
+
+  <nestedIfFor set:{"users#NestedParams"}>
+    DELETE FROM users
+    <where>
+      [[ if ids != nil :{
+        AND id IN (
+          [[ for id in ids :{
+            #{id},
+          }]]
+        )
+      }]]
+      [[ if status != nil :{
+        AND status = #{status}
+      }]]
+    </>
+  </>
+
+  <strictUser set:{"users#StrictParams"}>
+    SELECT * FROM users WHERE name = #{name}
+  </>
+
+  <insertUser set:{"users#InsertUserParams"}>
+    INSERT INTO users (name, status, score, age)
+    VALUES (#{name}, #{status}, #{score}, #{age})
+  </>
+
+  <insertUserPg set:{"users#InsertUserParams"}>
+    INSERT INTO users (name, status, score, age)
+    VALUES (#{name}, #{status}, #{score}, #{age})
+    RETURNING id
+  </>
+
+  <insertUserMssql set:{"users#InsertUserParams"}>
+    INSERT INTO users (name, status, score, age)
+    OUTPUT INSERTED.id
+    VALUES (#{name}, #{status}, #{score}, #{age})
+  </>
+
+  <selectUserMaxId set:{"users#InsertUserParams"}>
+    SELECT MAX(id) FROM users
+    WHERE name = #{name} AND status = #{status} AND score = #{score} AND age = #{age}
+  </>
+
+  <selectUserById set:{"users#UserIdParams"}>
+    SELECT * FROM users WHERE id = #{id}
+  </>
+
+  <deleteUser set:{"users#UserIdParams"}>
+    DELETE FROM users WHERE id = #{id}
+  </>
+
+</>

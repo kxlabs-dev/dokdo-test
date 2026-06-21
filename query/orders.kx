@@ -1,0 +1,45 @@
+<orders>
+
+  <insertOrder set:{"orders#OrderInsertParams"}>
+    INSERT INTO orders (user_id, item, amount)
+    VALUES (#{userId}, #{item}, #{amount})
+  </>
+
+  <insertOrderPg set:{"orders#OrderInsertParams"}>
+    INSERT INTO orders (user_id, item, amount)
+    VALUES (#{userId}, #{item}, #{amount})
+    RETURNING id
+  </>
+
+  <insertOrderMssql set:{"orders#OrderInsertParams"}>
+    INSERT INTO orders (user_id, item, amount)
+    OUTPUT INSERTED.id
+    VALUES (#{userId}, #{item}, #{amount})
+  </>
+
+  <selectOrderMaxId set:{"orders#OrderInsertParams"}>
+    SELECT MAX(id) FROM orders
+    WHERE user_id = #{userId} AND item = #{item} AND amount = #{amount}
+  </>
+
+  <selectOrdersByUser set:{"orders#OrderUserIdParams"}>
+    SELECT * FROM orders WHERE user_id = #{userId}
+  </>
+
+  <selectOrderById set:{"orders#OrderIdParams"}>
+    SELECT * FROM orders WHERE id = #{id}
+  </>
+
+  <updateOrder set:{"orders#OrderUpdateParams"}>
+    UPDATE orders SET
+    [[ for field in updates :{
+      ${field.Key} = #{field.Value},
+    }]]
+    WHERE id = #{id}
+  </>
+
+  <deleteOrder set:{"orders#OrderIdParams"}>
+    DELETE FROM orders WHERE id = #{id}
+  </>
+
+</>
