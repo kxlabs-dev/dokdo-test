@@ -67,6 +67,8 @@ github.com/kxlabs-dev/dokdo v0.0.0-20260619120858-a1b4e87f5709 h1:x3teMYfWbU3+9r
 github.com/kxlabs-dev/dokdo v0.0.0-20260619120858-a1b4e87f5709/go.mod h1:LjD8IKce2Jwdb0VLcObFyGha6B+zgoyjuF3BBgRWyWQ=
 github.com/kxlabs-dev/dokdo v0.2.0-alpha h1:J2FdIFoGgm7o+P5CNZhf5lsJW66J85Bzxn3iCb8jUVs=
 github.com/kxlabs-dev/dokdo v0.2.0-alpha/go.mod h1:LjD8IKce2Jwdb0VLcObFyGha6B+zgoyjuF3BBgRWyWQ=
+github.com/kxlabs-dev/dokdo v0.2.0-alpha.0.20260622103353-10d99cea32cb h1:Lu/rRgp3+9/SC3HN8iq3nABtbXo1YQTcdwsPV2CjxTU=
+github.com/kxlabs-dev/dokdo v0.2.0-alpha.0.20260622103353-10d99cea32cb/go.mod h1:LjD8IKce2Jwdb0VLcObFyGha6B+zgoyjuF3BBgRWyWQ=
 github.com/kylelemons/godebug v1.1.0/go.mod h1:9/0rRGxNHcop5bhtWyNeEfOS8JIWk580+fNqagV/RAw=
 github.com/microsoft/go-mssqldb v1.8.2/go.mod h1:vp38dT33FGfVotRiTmDo3bFyaHq+p3LektQrjTULowo=
 github.com/microsoft/go-mssqldb v1.10.0 h1:pHEt+Qz6YFPWqREq10mqSE524QQo+/QremwTCQht7TY=

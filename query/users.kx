@@ -157,4 +157,21 @@
     DELETE FROM users WHERE id = #{id}
   </>
 
+  <searchUserByName set:{"users#UserSearchParams"}>
+    SELECT * FROM users
+    <where>
+      [[ if name != nil :{
+        AND name = #{name}
+      }]]
+    </>
+  </>
+
+  <getUserById set:{"common#CommonParams"}>
+    SELECT * FROM users WHERE id = #{id}
+  </>
+
+  <listUsers set:{"common#PageParams"}>
+    SELECT * FROM users LIMIT #{limit} OFFSET #{offset}
+  </>
+
 </>

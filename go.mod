@@ -2,7 +2,7 @@ module testapp
 
 go 1.26.4
 
-require github.com/kxlabs-dev/dokdo v0.2.0-alpha
+require github.com/kxlabs-dev/dokdo v0.2.0-alpha.0.20260622103353-10d99cea32cb
 
 require (
 	filippo.io/edwards25519 v1.2.0 // indirect

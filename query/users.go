@@ -81,3 +81,9 @@ type InsertUserParams struct {
 type UserIdParams struct {
 	Id int64
 }
+
+// set:{} 파일 경계 검증용 (users.go)
+type UserSearchParams struct {
+	Name *string
+}
+
