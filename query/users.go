@@ -21,22 +21,26 @@ type ColumnParams struct {
 	Columns []string
 }
 
+type UpdateField struct {
+	Key   string
+	Value string
+}
+
+type BulkInsertRow struct {
+	Name  string
+	Email string
+	Age   int
+}
+
 // Case 5: for struct UPDATE SET절
 type UpdateParams struct {
 	Id     int64
-	Fields []struct {
-		Key   string
-		Value string
-	}
+	Fields []UpdateField
 }
 
 // Case 6: for struct 벌크 INSERT
 type BulkInsertParams struct {
-	Rows []struct {
-		Name  string
-		Email string
-		Age   int
-	}
+	Rows []BulkInsertRow
 }
 
 // Case 8: 이스케이프 \>= \<= \> \<
@@ -85,5 +89,46 @@ type UserIdParams struct {
 // set:{} 파일 경계 검증용 (users.go)
 type UserSearchParams struct {
 	Name *string
+}
+
+// struct 드릴링 테스트용
+type AddressInfo struct {
+	City    string
+	Country string
+}
+
+type UserDetailItem struct {
+	Score   int64
+	Address AddressInfo
+}
+
+type DrillParams struct {
+	Items []UserDetailItem
+}
+
+// switch → for 테스트용
+type SwitchForParams struct {
+	Type  string
+	Items []BulkInsertRow
+}
+
+// for → switch 테스트용
+type StatusItem struct {
+	Id     int64
+	Status string
+}
+
+type ForSwitchParams struct {
+	Items []StatusItem
+}
+
+// for → switch → for 테스트용
+type IdGroup struct {
+	Type string
+	Ids  []int64
+}
+
+type ForSwitchForParams struct {
+	Groups []IdGroup
 }
 

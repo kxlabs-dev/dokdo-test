@@ -129,7 +129,7 @@ func TestInjection(t *testing.T) {
 	for _, tc := range fieldPayloads {
 		sql, _, err := dq.Build("users#updateUser", query.UpdateParams{
 			Id:     1,
-			Fields: []struct{ Key, Value string }{{Key: tc.payload, Value: "x"}},
+			Fields: []query.UpdateField{{Key: tc.payload, Value: "x"}},
 		})
 		r := result{label: tc.label, payload: tc.payload, context: "updateUser"}
 		if err != nil {

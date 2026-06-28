@@ -214,29 +214,19 @@ func main() {
 	// ─── 케이스 5: for struct UPDATE SET절 ───────────────────────────
 	run(dq, queryDir, "케이스 5-1 2필드", "users#updateUser",
 		query.UpdateParams{
-			Id: 1,
-			Fields: []struct {
-				Key   string
-				Value string
-			}{{"name", "kim"}, {"age", "30"}},
+			Id:     1,
+			Fields: []query.UpdateField{{"name", "kim"}, {"age", "30"}},
 		})
 	run(dq, queryDir, "케이스 5-2 빈슬라이스", "users#updateUser",
 		query.UpdateParams{
-			Id: 1,
-			Fields: []struct {
-				Key   string
-				Value string
-			}{},
+			Id:     1,
+			Fields: []query.UpdateField{},
 		})
 
 	// ─── 케이스 6: for struct 벌크 INSERT ────────────────────────────
 	run(dq, queryDir, "케이스 6-1 3건", "users#bulkInsert",
 		query.BulkInsertParams{
-			Rows: []struct {
-				Name  string
-				Email string
-				Age   int
-			}{
+			Rows: []query.BulkInsertRow{
 				{"Alice", "alice@example.com", 30},
 				{"Bob", "bob@example.com", 25},
 				{"Carol", "carol@example.com", 35},

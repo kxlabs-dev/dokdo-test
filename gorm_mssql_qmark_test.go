@@ -70,7 +70,7 @@ func TestGORMMSSQLQuestionMark(t *testing.T) {
 	// 존재하지 않는 id=0 업데이트는 RowsAffected=0이지만 Error는 없어야 함
 	s2, a2, err := dqMySQL.Build("orders#updateOrder", query.OrderUpdateParams{
 		Id: 0,
-		Updates: []struct{ Key, Value string }{
+		Updates: []query.OrderUpdateField{
 			{Key: "item", Value: "pencil"},
 			{Key: "amount", Value: "1"},
 		},

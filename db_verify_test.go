@@ -318,7 +318,7 @@ func runCRUD(t *testing.T, label string, db *sql.DB, dq *dokdo.Dokdo, kind dbKin
 	// ── UPDATE-6: orders 동적 SET ──────────────────────────────────────────
 	s, a = mustBuild("UPDATE-6 orders dynamic SET", "orders#updateOrder", query.OrderUpdateParams{
 		Id: orderID,
-		Updates: []struct{ Key, Value string }{
+		Updates: []query.OrderUpdateField{
 			{Key: "item", Value: "monitor"},
 			{Key: "amount", Value: "200"},
 		},
@@ -351,7 +351,7 @@ func runCRUD(t *testing.T, label string, db *sql.DB, dq *dokdo.Dokdo, kind dbKin
 	// ── UPDATE-7: users 단일 필드 ──────────────────────────────────────────
 	s, a = mustBuild("UPDATE-7 users name", "users#updateUser", query.UpdateParams{
 		Id:     userID1,
-		Fields: []struct{ Key, Value string }{{Key: "name", Value: "alice-v2"}},
+		Fields: []query.UpdateField{{Key: "name", Value: "alice-v2"}},
 	})
 	if _, err := db.Exec(s, a...); err != nil {
 		fail("UPDATE-7 users name", err)

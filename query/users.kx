@@ -174,4 +174,66 @@
     SELECT * FROM users LIMIT #{limit} OFFSET #{offset}
   </>
 
+  <selectWithDrilling set:{"users#DrillParams"}>
+    SELECT * FROM users WHERE score IN (
+    [[ for item in items :{
+      #{item.Score},
+    }]]
+    )
+    AND city IN (
+    [[ for item in items :{
+      #{item.Address.City},
+    }]]
+    )
+  </>
+
+  <selectSwitchFor set:{"users#SwitchForParams"}>
+    [[ switch (type) :{
+      case ("bulk") :{
+        INSERT INTO users (name, email, age) VALUES
+        [[ for row in items :{
+          (#{row.Name}, #{row.Email}, #{row.Age}),
+        }]]
+      }
+      default :{
+        SELECT 1
+      }
+    }]]
+  </>
+
+  <selectForSwitch set:{"users#ForSwitchParams"}>
+    SELECT * FROM users WHERE id IN (
+    [[ for item in items :{
+      [[ switch (item.Status) :{
+        case ("active") :{
+          #{item.Id},
+        }
+        default :{
+          0,
+        }
+      }]]
+    }]]
+    )
+  </>
+
+  <selectForSwitchFor set:{"users#ForSwitchForParams"}>
+    SELECT * FROM users
+    <where>
+    [[ for group in groups :{
+      [[ switch (group.Type) :{
+        case ("include") :{
+          AND id IN (
+            [[ for id in group.Ids :{
+              #{id},
+            }]]
+          )
+        }
+        default :{
+          AND 1=1
+        }
+      }]]
+    }]]
+    </>
+  </>
+
 </>

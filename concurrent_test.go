@@ -50,10 +50,7 @@ func TestConcurrentBuild(t *testing.T) {
 			params: func() any {
 				return query.UpdateParams{
 					Id: 1,
-					Fields: []struct {
-						Key   string
-						Value string
-					}{{"name", "kim"}, {"age", "30"}},
+					Fields: []query.UpdateField{{"name", "kim"}, {"age", "30"}},
 				}
 			},
 		},

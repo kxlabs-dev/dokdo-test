@@ -323,7 +323,7 @@ func runGORMCases(t *testing.T, label string, db *gorm.DB, dq *dokdo.Dokdo, kind
 	// ── CASE-4: UPDATE updateOrder (동적 SET) + Raw().Scan() 으로 검증 ─────
 	s, a = mustBuild("CASE-4 update", "orders#updateOrder", query.OrderUpdateParams{
 		Id: orderID,
-		Updates: []struct{ Key, Value string }{
+		Updates: []query.OrderUpdateField{
 			{Key: "item", Value: "monitor"},
 			{Key: "amount", Value: "200"},
 		},

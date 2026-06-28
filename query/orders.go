@@ -6,12 +6,14 @@ type OrderInsertParams struct {
 	Amount int
 }
 
+type OrderUpdateField struct {
+	Key   string
+	Value string
+}
+
 type OrderUpdateParams struct {
 	Id      int64
-	Updates []struct {
-		Key   string
-		Value string
-	}
+	Updates []OrderUpdateField
 }
 
 type OrderIdParams struct {
